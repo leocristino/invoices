@@ -1,16 +1,18 @@
 <template>
   <div class="login-container">
-    <h1>Vue Invoices App</h1>
-    <form autocomplete="off">
-			<p>Login</p>
-			<label for="email">Email</label>
-      <input type="text" class="login-container__input" autocomplete="off" placeholder="email@email.com" id="email" v-model="username"/>
-			<label for="password">Password</label>
-      <input type="password" class="login-container__input" placeholder="Password" autocomplete="off" v-model="password"/>
-     
-      <button type="submit" @click.prevent="submitForm">Login</button>
-			<a href="/" class="back-to-login">Back to Login</a>
-    </form>
+    <div class="child">
+      <h1>Vue Invoices App</h1>
+      <form autocomplete="off">
+        <p>Login</p>
+        <label for="email">Email</label>
+        <input type="text" class="login-container__input" autocomplete="off" placeholder="email@email.com" id="email" v-model="username"/>
+        <label for="password">Password</label>
+        <input type="password" class="login-container__input" placeholder="Password" autocomplete="off" v-model="password"/>
+      
+        <button type="submit" @click.prevent="submitForm">Login</button>
+        <a href="/" class="back-to-login">Back to Login</a>
+      </form>
+    </div>
   </div>
 </template>
 
@@ -33,31 +35,14 @@ export default {
 </script>
 
 <style>
-	*,
-  *:before,
-  *:after {
-  box-sizing: border-box;
-  }
-  html,
-  body {
-    height: 100%;
-}
-
-  body{
-    margin: 0;
-    overflow: hidden;
-  }
-
-  #app{
-    margin-top: 0;
-  }
 
   .login-container {
+    height: 100vh;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    justify-content: center;
     align-items: center;
     background-color: #141625;
-    height: 100vh;
   }
 
 	.login-container > h1{

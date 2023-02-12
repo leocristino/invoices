@@ -1,18 +1,31 @@
-<template>
-  <div class="login-container">
-    <h1>Vue Invoices App</h1>
-    <form autocomplete="off">
-			<p>Login</p>
-			<label for="email">Email</label>
-      <input type="text" class="login-container__input" autocomplete="off" placeholder="email@email.com" id="email" v-model="username"/>
-			<label for="password">Password</label>
-      <input type="password" class="login-container__input" placeholder="Password" autocomplete="off" v-model="password"/>
-      <div>
-        <span class="question">Don't have an account yet?</span><span class="question"><a href="#" class="sign">Sign up here</a></span>
+<template class="container">
+  <div class="autenthication-container">
+    <div class="child">
+      <h1 class="login-container__title">Vue Invoices App</h1>
 
-      </div>
-      <button type="submit" @click.prevent="submitForm">Login</button>
-    </form>
+      <form v-if="isLogin" autocomplete="off">
+        <p>Login</p>
+        <label for="email">Email</label>
+        <input type="text" class="login-container__input" autocomplete="off" placeholder="email@email.com" id="email" v-model="username"/>
+        <label for="password">Password</label>
+        <input type="password" class="login-container__input login-container__input-password" placeholder="Password" autocomplete="off" v-model="password"/>
+        <div>
+          <span class="question">Don't have an account yet?</span><span class="question"><router-link :to='{ name: "TheRegister"}' class="sign">Sign up here</router-link></span>
+        </div>
+        <button type="submit" class="login-container__submit" @click.prevent="submitForm">Login</button>
+      </form>
+
+      <form v-else autocomplete="off">
+        <p>Login</p>
+        <label for="email">Email</label>
+        <input type="text" class="login-container__input" autocomplete="off" placeholder="email@email.com" id="email" v-model="username"/>
+        <label for="password">Password</label>
+        <input type="password" class="login-container__input" placeholder="Password" autocomplete="off" v-model="password"/>
+      
+        <button type="submit" class="login-container__submit" @click.prevent="submitForm">Login</button>
+        <router-link :to='{ name: "TheHome"}'   class="back-to-login">Back to Login</router-link>
+      </form>
+    </div>
   </div>
 </template>
 
@@ -25,6 +38,12 @@ export default {
     };
   },
 
+  computed: {
+    isLogin(){
+      return this.$route.name == 'TheHome'
+    }
+  },
+
   methods: {
     submitForm() {
       console.log(`Username: ${this.username} Password: ${this.password}`);
@@ -35,36 +54,20 @@ export default {
 </script>
 
 <style>
-	*,
-  *:before,
-  *:after {
-  box-sizing: border-box;
-  }
-  html,
-  body {
-    height: 100%;
-}
 
-  body{
-    margin: 0;
-    overflow: hidden;
+  .login-container__title{
+    margin-bottom: 40px;
+    color: white;
   }
 
-  #app{
-    margin-top: 0;
-  }
-
-  .login-container {
+  .autenthication-container {
+    height: 100vh;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    justify-content: center;
     align-items: center;
     background-color: #141625;
-    height: 100vh;
   }
-
-	.login-container > h1{
-		color: white
-	}
 
 	form > p{
 		color: white;
@@ -112,12 +115,12 @@ export default {
 		height: 35px;
   }
   
-  input[type="password"] {
+  .login-container__input-password {
     margin-bottom: 15px
   }
 
-  button[type="submit"] {
-    width: 100%;
+  .login-container__submit {
+    width: 250px;
     padding: 10px;
     background-color: #0E0E0E;
     color: #fff;
@@ -125,5 +128,9 @@ export default {
     border-radius: 15px;
     font-weight: bold;
     margin-top: 30px;
-  }
+  } 
+  .back-to-login{
+		color: white;
+		font-size: 13px;
+	}
 </style>
